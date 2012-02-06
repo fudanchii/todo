@@ -45,7 +45,7 @@ describe('commands', function() {
       });
       
       function finish() {
-        out.should.eql('     #1  \u001b[31m✖\u001b[39m  Foo');
+        out.should.eql('     #1  \u001b[31m✘\u001b[39m  Foo');
         commands.print.restore();
         storage.get.restore();
         done();
