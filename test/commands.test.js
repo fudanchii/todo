@@ -152,7 +152,7 @@ describe('commands', function() {
   });
 
   describe('.operate()', function(done) {
-    it('should work with parameterized list name', function(done) {
+    it('should work with custom list name', function(done) {
       sinon.stub(storage, 'get', function(key, cb) {
         cb(null, []);
       });
