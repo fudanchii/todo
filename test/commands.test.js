@@ -116,7 +116,7 @@ describe('commands', function() {
   });
   
   describe('.add()', function(done) {
-    it('should remove an item', function(done) {
+    it('should add an item', function(done) {
       sinon.stub(storage, 'get', function(key, cb) {
         cb(null, [{text: 'Foo', done: true}]);
       });
@@ -148,6 +148,26 @@ describe('commands', function() {
         done();
       });
       commands.clear();
+    });
+  });
+
+  describe('.operate()', function(done) {
+    it('should work with parameterized list name', function(done) {
+      sinon.stub(storage, 'get', function(key, cb) {
+        cb(null, []);
+      });
+      sinon.stub(storage, 'set', function(key, value, cb) {
+        key.should.eql('test');
+        value.should.eql([{text: 'hello world!', done: false}]);
+        cb();
+      });
+      sinon.stub(storage, 'save', function(key, cb) {
+        storage.set.restore();
+        storage.get.restore();
+        storage.save.restore();
+        done();
+      });
+      commands.operate('test', 'hello', ' world!');
     });
   });
 });
